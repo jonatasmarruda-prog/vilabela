@@ -1,109 +1,3 @@
-<!DOCTYPE html>
-<html lang="pt-BR">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Confirmação de Vaga - Trilheiros de Rondonópolis</title>
-
-<style>
-    body {
-        font-family: Arial, sans-serif;
-        background-color: #0d0d0d;
-        color: #ffffff;
-        text-align: center;
-        padding: 20px;
-    }
-
-    img {
-        width: 100%;
-        max-width: 650px;
-        border-radius: 12px;
-        margin-top: 10px;
-    }
-
-    h2 {
-        font-weight: bold;
-        color: #eaeaea;
-    }
-
-    input {
-        padding: 12px;
-        width: 90%;
-        max-width: 320px;
-        border-radius: 8px;
-        border: 1px solid #444;
-        background-color: #1a1a1a;
-        color: white;
-        font-size: 16px;
-        margin-top: 15px;
-    }
-
-    button {
-        padding: 14px 25px;
-        font-size: 18px;
-        font-weight: bold;
-        cursor: pointer;
-        border: none;
-        border-radius: 10px;
-        width: 90%;
-        max-width: 330px;
-        margin-top: 15px;
-    }
-
-    #confirmarBtn {
-        background-color: #1e90ff;
-        color: white;
-        display: none;
-    }
-
-    #vagasEsgotadas {
-        color: #ff4b4b;
-        font-size: 22px;
-        font-weight: bold;
-        display: none;
-        margin-top: 25px;
-    }
-</style>
-</head>
-
-<body>
-
-<!-- Banner -->
-<img src="https://i.imgur.com/DmIodge.jpeg" alt="Banner do Passeio">
-
-<h2>Confirme sua vaga no passeio</h2>
-<p style="color:#bfbfbf;">Preencha seu nome para continuar</p>
-
-<!-- Formulário -->
-<div id="form">
-    <input type="text" id="nome" placeholder="Digite seu nome aqui">
-    <button onclick="mostrarBotaoConfirmar()" style="background:#28a745; color:white;">Avançar</button>
-</div>
-
-<!-- Botão Confirmar -->
-<button id="confirmarBtn" onclick="confirmarVaga()">Clique aqui para confirmar</button>
-
-<!-- Botão Grupo – corrigido -->
-<a id="grupoBtn" href="https://chat.whatsapp.com/F9BokOclCnuDi8LBo15SVZ" 
-   target="_blank" 
-   style="text-decoration:none; display:none;">
-    <div style="
-        background:#28a745;
-        color:white;
-        padding:14px;
-        border-radius:10px;
-        width:90%;
-        max-width:330px;
-        margin:20px auto;
-        font-size:18px;
-        font-weight:bold;">
-        Entrar no grupo do passeio
-    </div>
-</a>
-
-<!-- Mensagem de vagas esgotadas -->
-<div id="vagasEsgotadas">🚫 Vagas preenchidas</div>
-
 <script>
 function mostrarBotaoConfirmar() {
     let nome = document.getElementById("nome").value.trim();
@@ -114,12 +8,23 @@ function mostrarBotaoConfirmar() {
     document.getElementById("confirmarBtn").style.display = "inline-block";
 }
 
-// MODO DE TESTE – BLOQUEIA APÓS 2 CONFIRMAÇÕES
 function confirmarVaga() {
 
     fetch('https://api.countapi.xyz/hit/trilheirosrondonopolis/teste')
-        .then(res => res.json())
+        .then(res => {
+            if (!res.ok) {
+                alert("Erro ao conectar com o servidor. Tente novamente.");
+            }
+            return res.json();
+        })
         .then(data => {
+
+            console.log("RETORNO COUNTAPI:", data); // DEBUG
+
+            if (!data || !data.value) {
+                alert("Erro no contador. Verifique o HTTPS.");
+                return;
+            }
 
             if (data.value > 2) {
                 document.getElementById("vagasEsgotadas").style.display = "block";
@@ -129,9 +34,11 @@ function confirmarVaga() {
 
             document.getElementById("grupoBtn").style.display = "block";
             document.getElementById("confirmarBtn").innerText = "Confirmado! ✔️";
+        })
+        .catch(err => {
+            console.error(err);
+            alert("Erro ao conectar. Precisa abrir o site com HTTPS.");
         });
 }
 </script>
 
-</body>
-</html>
