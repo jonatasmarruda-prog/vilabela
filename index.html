@@ -3,65 +3,51 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Confirmação de Vaga - Trilheiros de Rondonópolis</title>
+<title>Confirmação de Vaga - Trilheiros</title>
 
 <style>
     body {
-        font-family: Arial, sans-serif;
-        background-color: #0d0d0d;
-        color: white;
-        text-align: center;
-        padding: 20px;
+        background:#0d0d0d;
+        color:white;
+        font-family: Arial;
+        text-align:center;
+        padding:20px;
     }
     img {
-        width: 100%;
-        max-width: 650px;
-        border-radius: 12px;
-        margin-top: 10px;
+        width:100%;
+        max-width:650px;
+        border-radius:12px;
+        margin-top:10px;
     }
     input {
-        padding: 12px;
-        width: 90%;
-        max-width: 320px;
-        border-radius: 8px;
-        background-color: #1a1a1a;
-        border: 1px solid #444;
-        color: white;
-        margin-top: 20px;
+        width:90%;
+        max-width:320px;
+        padding:12px;
+        background:#1a1a1a;
+        border:1px solid #444;
+        color:white;
+        border-radius:8px;
+        margin-top:20px;
     }
     button {
-        padding: 14px;
-        width: 90%;
-        max-width: 330px;
-        border-radius: 10px;
-        font-size: 18px;
-        font-weight: bold;
-        border: none;
-        cursor: pointer;
-        margin-top: 20px;
+        width:90%;
+        max-width:330px;
+        padding:14px;
+        border:none;
+        border-radius:10px;
+        margin-top:20px;
+        font-weight:bold;
+        cursor:pointer;
     }
-    #confirmar {
-        background-color: #1e90ff;
-        display: none;
-    }
-    #grupo {
-        background-color: #28a745;
-        display: none;
-    }
-    #vagasMsg {
-        color: #ff4b4b;
-        font-size: 22px;
-        font-weight: bold;
-        margin-top: 25px;
-        display: none;
-    }
+    #confirmar { background:#1e90ff; display:none; }
+    #grupo { background:#28a745; display:none; }
+    #vagasMsg { color:red; font-size:22px; display:none; margin-top:20px; }
 </style>
 </head>
 
 <body>
 
-<!-- Banner -->
-<img src="https://i.imgur.com/DmIodge.jpeg" alt="Banner">
+<img src="https://i.imgur.com/DmIodge.jpeg">
 
 <h2>Confirme sua vaga no passeio</h2>
 <p>Digite seu nome para continuar</p>
@@ -78,24 +64,25 @@
 
 <div id="vagasMsg">🚫 Vagas preenchidas</div>
 
-<!-- Firebase -->
-<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js"></script>
-<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js"></script>
+<!-- Firebase V8 (compatível com GitHub Pages) -->
+<script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-database.js"></script>
 
 <script>
-const firebaseConfig = {
+// Configuração Firebase
+var firebaseConfig = {
   apiKey: "AIzaSyBF5IQNfZM7ggUhY6sNB7nHdQOWBv7y-xM",
   authDomain: "vilabela-98898.firebaseapp.com",
   databaseURL: "https://vilabela-98898-default-rtdb.firebaseio.com",
   projectId: "vilabela-98898",
   storageBucket: "vilabela-98898.firebasestorage.app",
   messagingSenderId: "79333145466",
-  appId: "1:79333145466:web:6c4341cb2497731b20b4c3",
-  measurementId: "G-MBQSSYJ875"
+  appId: "1:79333145466:web:6c4341cb2497731b20b4c3"
 };
 
+// Inicializar Firebase
 firebase.initializeApp(firebaseConfig);
-const db = firebase.database();
+var db = firebase.database();
 
 function mostrarConfirmar() {
     let nome = document.getElementById("nome").value.trim();
@@ -107,10 +94,10 @@ function mostrarConfirmar() {
 }
 
 function confirmarVaga() {
-    const ref = db.ref("vagas");
+    let ref = db.ref("vagas");
 
     ref.once("value").then((snap) => {
-        const data = snap.val();
+        let data = snap.val();
 
         if (!data) {
             alert("Erro ao carregar vagas.");
@@ -126,20 +113,14 @@ function confirmarVaga() {
             return;
         }
 
-        ref.update({ confirmacoes: atual + 1 })
-            .then(() => {
-                document.getElementById("grupo").style.display = "block";
-                document.getElementById("confirmar").innerHTML = "Confirmado ✔️";
-            })
-            .catch((err) => {
-                console.error(err);
-                alert("Erro ao confirmar. Tente novamente.");
-            });
+        ref.update({ confirmacoes: atual + 1 });
+
+        document.getElementById("grupo").style.display = "block";
+        document.getElementById("confirmar").innerText = "Confirmado ✔️";
     });
 }
 </script>
 
 </body>
 </html>
-
 
