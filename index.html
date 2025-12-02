@@ -1,44 +1,145 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Confirmação de Vaga - Trilheiros de Rondonópolis</title>
+
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #0d0d0d;
+        color: white;
+        text-align: center;
+        padding: 20px;
+    }
+    img {
+        width: 100%;
+        max-width: 650px;
+        border-radius: 12px;
+        margin-top: 10px;
+    }
+    input {
+        padding: 12px;
+        width: 90%;
+        max-width: 320px;
+        border-radius: 8px;
+        background-color: #1a1a1a;
+        border: 1px solid #444;
+        color: white;
+        margin-top: 20px;
+    }
+    button {
+        padding: 14px;
+        width: 90%;
+        max-width: 330px;
+        border-radius: 10px;
+        font-size: 18px;
+        font-weight: bold;
+        border: none;
+        cursor: pointer;
+        margin-top: 20px;
+    }
+    #confirmar {
+        background-color: #1e90ff;
+        display: none;
+    }
+    #grupo {
+        background-color: #28a745;
+        display: none;
+    }
+    #vagasMsg {
+        color: #ff4b4b;
+        font-size: 22px;
+        font-weight: bold;
+        margin-top: 25px;
+        display: none;
+    }
+</style>
+</head>
+
+<body>
+
+<!-- Banner -->
+<img src="https://i.imgur.com/DmIodge.jpeg" alt="Banner">
+
+<h2>Confirme sua vaga no passeio</h2>
+<p>Digite seu nome para continuar</p>
+
+<input type="text" id="nome" placeholder="Seu nome">
+
+<button style="background:#28a745;" onclick="mostrarConfirmar()">Avançar</button>
+
+<button id="confirmar" onclick="confirmarVaga()">Clique aqui para confirmar</button>
+
+<a href="https://chat.whatsapp.com/F9BokOclCnuDi8LBo15SVZ" target="_blank">
+    <button id="grupo">Entrar no grupo do passeio</button>
+</a>
+
+<div id="vagasMsg">🚫 Vagas preenchidas</div>
+
+<!-- Firebase -->
+<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js"></script>
+
 <script>
-function mostrarBotaoConfirmar() {
+const firebaseConfig = {
+  apiKey: "AIzaSyBF5IQNfZM7ggUhY6sNB7nHdQOWBv7y-xM",
+  authDomain: "vilabela-98898.firebaseapp.com",
+  databaseURL: "https://vilabela-98898-default-rtdb.firebaseio.com",
+  projectId: "vilabela-98898",
+  storageBucket: "vilabela-98898.firebasestorage.app",
+  messagingSenderId: "79333145466",
+  appId: "1:79333145466:web:6c4341cb2497731b20b4c3",
+  measurementId: "G-MBQSSYJ875"
+};
+
+firebase.initializeApp(firebaseConfig);
+const db = firebase.database();
+
+function mostrarConfirmar() {
     let nome = document.getElementById("nome").value.trim();
     if (nome.length < 2) {
         alert("Digite um nome válido.");
         return;
     }
-    document.getElementById("confirmarBtn").style.display = "inline-block";
+    document.getElementById("confirmar").style.display = "block";
 }
 
 function confirmarVaga() {
+    const ref = db.ref("vagas");
 
-    fetch('https://api.countapi.xyz/hit/trilheirosrondonopolis/teste')
-        .then(res => {
-            if (!res.ok) {
-                alert("Erro ao conectar com o servidor. Tente novamente.");
-            }
-            return res.json();
-        })
-        .then(data => {
+    ref.once("value").then((snap) => {
+        const data = snap.val();
 
-            console.log("RETORNO COUNTAPI:", data); // DEBUG
+        if (!data) {
+            alert("Erro ao carregar vagas.");
+            return;
+        }
 
-            if (!data || !data.value) {
-                alert("Erro no contador. Verifique o HTTPS.");
-                return;
-            }
+        let atual = data.confirmacoes;
+        let limite = data.limite;
 
-            if (data.value > 2) {
-                document.getElementById("vagasEsgotadas").style.display = "block";
-                document.getElementById("confirmarBtn").style.display = "none";
-                return;
-            }
+        if (atual >= limite) {
+            document.getElementById("vagasMsg").style.display = "block";
+            document.getElementById("confirmar").style.display = "none";
+            return;
+        }
 
-            document.getElementById("grupoBtn").style.display = "block";
-            document.getElementById("confirmarBtn").innerText = "Confirmado! ✔️";
-        })
-        .catch(err => {
-            console.error(err);
-            alert("Erro ao conectar. Precisa abrir o site com HTTPS.");
-        });
+        ref.update({ confirmacoes: atual + 1 })
+            .then(() => {
+                document.getElementById("grupo").style.display = "block";
+                document.getElementById("confirmar").innerHTML = "Confirmado ✔️";
+            })
+            .catch((err) => {
+                console.error(err);
+                alert("Erro ao confirmar. Tente novamente.");
+            });
+    });
 }
 </script>
+
+</body>
+</html>
+
 
