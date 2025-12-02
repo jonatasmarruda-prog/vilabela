@@ -2,54 +2,91 @@
 <html lang="pt-BR">
 <head>
 <meta charset="UTF-8">
-<title>Confirmação de Vaga</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Confirmação de Vaga - Trilheiros de Rondonópolis</title>
+
 <style>
     body {
         font-family: Arial, sans-serif;
+        background-color: #0d0d0d; /* fundo escuro */
+        color: #ffffff; /* letras brancas */
         text-align: center;
         padding: 20px;
     }
-    #form, #confirmarBtn, #grupoBtn, #vagasEsgotadas {
-        margin-top: 20px;
-    }
-    input {
-        padding: 10px;
-        width: 250px;
-        font-size: 16px;
+
+    img {
+        width: 100%;
+        max-width: 650px;
+        border-radius: 12px;
         margin-top: 10px;
     }
+
+    h2 {
+        font-weight: bold;
+        color: #eaeaea;
+    }
+
+    input {
+        padding: 12px;
+        width: 90%;
+        max-width: 320px;
+        border-radius: 8px;
+        border: 1px solid #444;
+        background-color: #1a1a1a;
+        color: white;
+        font-size: 16px;
+        margin-top: 15px;
+    }
+
     button {
-        padding: 12px 25px;
+        padding: 14px 25px;
         font-size: 18px;
         font-weight: bold;
         cursor: pointer;
         border: none;
-        border-radius: 8px;
+        border-radius: 10px;
+        width: 90%;
+        max-width: 330px;
+        margin-top: 15px;
     }
+
     #confirmarBtn {
-        background-color: #007bff;
+        background-color: #1e90ff; /* azul confirmação */
         color: white;
         display: none;
     }
-    #grupoBtn {
-        background-color: #28a745;
+
+    #grupoBtn button {
+        background-color: #28a745; /* verde trilheiros */
         color: white;
+    }
+
+    #grupoBtn {
         display: none;
+    }
+
+    #vagasEsgotadas {
+        color: #ff4b4b;
+        font-size: 22px;
+        font-weight: bold;
+        display: none;
+        margin-top: 25px;
     }
 </style>
 </head>
+
 <body>
 
 <!-- Banner -->
-<img src="blob:https://imgur.com/ac2002f3-d0f6-448c-84e9-a05c132a59b8" style="width:100%; max-width:600px; border-radius:12px;">
+<img src="blob:https://imgur.com/ac2002f3-d0f6-448c-84e9-a05c132a59b8">
 
-<h2>Preencha seu nome para confirmar sua vaga</h2>
+<h2>Confirme sua vaga no passeio</h2>
+<p style="color:#bfbfbf;">Preencha seu nome para continuar</p>
 
 <!-- Formulário -->
 <div id="form">
     <input type="text" id="nome" placeholder="Digite seu nome aqui">
-    <br>
-    <button onclick="mostrarBotaoConfirmar()">Avançar</button>
+    <button onclick="mostrarBotaoConfirmar()" style="background:#28a745; color:white;">Avançar</button>
 </div>
 
 <!-- Botão Confirmar -->
@@ -57,11 +94,11 @@
 
 <!-- Botão Grupo -->
 <a id="grupoBtn" href="https://chat.whatsapp.com/F9BokOclCnuDi8LBo15SVZ" target="_blank">
-    <button style="width:250px;">Entrar no grupo do passeio</button>
+    <button>Entrar no grupo do passeio</button>
 </a>
 
 <!-- Mensagem de vagas esgotadas -->
-<h2 id="vagasEsgotadas" style="color:red; display:none;">🚫 Vagas preenchidas</h2>
+<div id="vagasEsgotadas">🚫 Vagas preenchidas</div>
 
 <script>
 function mostrarBotaoConfirmar() {
@@ -73,22 +110,21 @@ function mostrarBotaoConfirmar() {
     document.getElementById("confirmarBtn").style.display = "inline-block";
 }
 
-// Função que confirma e conta acessos
+// Função de confirmação e contador
 function confirmarVaga() {
 
     fetch('https://api.countapi.xyz/hit/trilheirosrondonopolis/confirmacoes')
         .then(res => res.json())
         .then(data => {
+
             if (data.value > 42) {
                 document.getElementById("vagasEsgotadas").style.display = "block";
                 document.getElementById("confirmarBtn").style.display = "none";
                 return;
             }
 
-            // Se ainda tiver vaga, mostra botão do grupo
             document.getElementById("grupoBtn").style.display = "block";
             document.getElementById("confirmarBtn").innerText = "Confirmado! ✔️";
-
         });
 }
 </script>
