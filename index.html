@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<title>Confirmação de Vaga</title>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        text-align: center;
+        padding: 20px;
+    }
+    #form, #confirmarBtn, #grupoBtn, #vagasEsgotadas {
+        margin-top: 20px;
+    }
+    input {
+        padding: 10px;
+        width: 250px;
+        font-size: 16px;
+        margin-top: 10px;
+    }
+    button {
+        padding: 12px 25px;
+        font-size: 18px;
+        font-weight: bold;
+        cursor: pointer;
+        border: none;
+        border-radius: 8px;
+    }
+    #confirmarBtn {
+        background-color: #007bff;
+        color: white;
+        display: none;
+    }
+    #grupoBtn {
+        background-color: #28a745;
+        color: white;
+        display: none;
+    }
+</style>
+</head>
+<body>
+
+<!-- Banner -->
+<img src="blob:https://imgur.com/ac2002f3-d0f6-448c-84e9-a05c132a59b8" style="width:100%; max-width:600px; border-radius:12px;">
+
+<h2>Preencha seu nome para confirmar sua vaga</h2>
+
+<!-- Formulário -->
+<div id="form">
+    <input type="text" id="nome" placeholder="Digite seu nome aqui">
+    <br>
+    <button onclick="mostrarBotaoConfirmar()">Avançar</button>
+</div>
+
+<!-- Botão Confirmar -->
+<button id="confirmarBtn" onclick="confirmarVaga()">Clique aqui para confirmar</button>
+
+<!-- Botão Grupo -->
+<a id="grupoBtn" href="https://chat.whatsapp.com/F9BokOclCnuDi8LBo15SVZ" target="_blank">
+    <button style="width:250px;">Entrar no grupo do passeio</button>
+</a>
+
+<!-- Mensagem de vagas esgotadas -->
+<h2 id="vagasEsgotadas" style="color:red; display:none;">🚫 Vagas preenchidas</h2>
+
+<script>
+function mostrarBotaoConfirmar() {
+    let nome = document.getElementById("nome").value.trim();
+    if (nome.length < 2) {
+        alert("Digite um nome válido.");
+        return;
+    }
+    document.getElementById("confirmarBtn").style.display = "inline-block";
+}
+
+// Função que confirma e conta acessos
+function confirmarVaga() {
+
+    fetch('https://api.countapi.xyz/hit/trilheirosrondonopolis/confirmacoes')
+        .then(res => res.json())
+        .then(data => {
+            if (data.value > 42) {
+                document.getElementById("vagasEsgotadas").style.display = "block";
+                document.getElementById("confirmarBtn").style.display = "none";
+                return;
+            }
+
+            // Se ainda tiver vaga, mostra botão do grupo
+            document.getElementById("grupoBtn").style.display = "block";
+            document.getElementById("confirmarBtn").innerText = "Confirmado! ✔️";
+
+        });
+}
+</script>
+
+</body>
+</html>
