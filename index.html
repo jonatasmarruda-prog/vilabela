@@ -8,8 +8,8 @@
 <style>
     body {
         font-family: Arial, sans-serif;
-        background-color: #0d0d0d; /* fundo escuro */
-        color: #ffffff; /* letras brancas */
+        background-color: #0d0d0d;
+        color: #ffffff;
         text-align: center;
         padding: 20px;
     }
@@ -51,17 +51,8 @@
     }
 
     #confirmarBtn {
-        background-color: #1e90ff; /* azul confirmação */
+        background-color: #1e90ff;
         color: white;
-        display: none;
-    }
-
-    #grupoBtn button {
-        background-color: #28a745; /* verde trilheiros */
-        color: white;
-    }
-
-    #grupoBtn {
         display: none;
     }
 
@@ -78,7 +69,7 @@
 <body>
 
 <!-- Banner -->
-<img src="blob:https://imgur.com/ac2002f3-d0f6-448c-84e9-a05c132a59b8">
+<img src="https://i.imgur.com/DmIodge.jpeg" alt="Banner do Passeio">
 
 <h2>Confirme sua vaga no passeio</h2>
 <p style="color:#bfbfbf;">Preencha seu nome para continuar</p>
@@ -92,9 +83,22 @@
 <!-- Botão Confirmar -->
 <button id="confirmarBtn" onclick="confirmarVaga()">Clique aqui para confirmar</button>
 
-<!-- Botão Grupo -->
-<a id="grupoBtn" href="https://chat.whatsapp.com/F9BokOclCnuDi8LBo15SVZ" target="_blank">
-    <button>Entrar no grupo do passeio</button>
+<!-- Botão Grupo – corrigido -->
+<a id="grupoBtn" href="https://chat.whatsapp.com/F9BokOclCnuDi8LBo15SVZ" 
+   target="_blank" 
+   style="text-decoration:none; display:none;">
+    <div style="
+        background:#28a745;
+        color:white;
+        padding:14px;
+        border-radius:10px;
+        width:90%;
+        max-width:330px;
+        margin:20px auto;
+        font-size:18px;
+        font-weight:bold;">
+        Entrar no grupo do passeio
+    </div>
 </a>
 
 <!-- Mensagem de vagas esgotadas -->
@@ -110,14 +114,14 @@ function mostrarBotaoConfirmar() {
     document.getElementById("confirmarBtn").style.display = "inline-block";
 }
 
-// Função de confirmação e contador
+// MODO DE TESTE – BLOQUEIA APÓS 2 CONFIRMAÇÕES
 function confirmarVaga() {
 
-    fetch('https://api.countapi.xyz/hit/trilheirosrondonopolis/confirmacoes')
+    fetch('https://api.countapi.xyz/hit/trilheirosrondonopolis/teste')
         .then(res => res.json())
         .then(data => {
 
-            if (data.value > 42) {
+            if (data.value > 2) {
                 document.getElementById("vagasEsgotadas").style.display = "block";
                 document.getElementById("confirmarBtn").style.display = "none";
                 return;
