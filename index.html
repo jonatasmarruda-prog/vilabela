@@ -1,174 +1,155 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Pagamentos | Trilheiros</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pagamentos | Trilheiros</title>
 
-  <style>
-    body {
-      margin: 0;
-      font-family: "Segoe UI", Arial, sans-serif;
-      background-color: #000;
-      color: #f1f1f1;
-    }
+<style>
+* {
+  box-sizing: border-box;
+}
 
-    header img {
-      width: 100%;
-      max-height: 320px;
-      object-fit: cover;
-    }
+body {
+  margin: 0;
+  font-family: Arial, Helvetica, sans-serif;
+  background-color: #000;
+  color: #ffffff;
+}
 
-    .container {
-      max-width: 900px;
-      margin: auto;
-      padding: 25px;
-    }
+header img {
+  width: 100%;
+  display: block;
+}
 
-    h1 {
-      text-align: center;
-      margin-bottom: 30px;
-      color: #00e6a8;
-      font-size: 28px;
-    }
+main {
+  background-color: #000;
+  padding: 30px 15px;
+}
 
-    .card {
-      background: #111;
-      border-radius: 14px;
-      padding: 22px;
-      margin-bottom: 25px;
-      border: 1px solid #222;
-      box-shadow: 0 0 20px rgba(0, 230, 168, 0.08);
-    }
+h1 {
+  text-align: center;
+  color: #00e6a8;
+  margin-bottom: 25px;
+}
 
-    .card h2 {
-      text-align: center;
-      margin-bottom: 15px;
-      color: #00e6a8;
-      font-size: 22px;
-    }
+.card {
+  background-color: #111;
+  border: 1px solid #222;
+  border-radius: 12px;
+  padding: 20px;
+  margin-bottom: 25px;
+}
 
-    .price {
-      font-size: 16px;
-      margin: 6px 0;
-      text-align: center;
-    }
+.card h2 {
+  text-align: center;
+  color: #00e6a8;
+}
 
-    .btn {
-      width: 100%;
-      padding: 14px;
-      margin-top: 12px;
-      border-radius: 10px;
-      font-size: 16px;
-      font-weight: bold;
-      border: none;
-      cursor: pointer;
-      text-align: center;
-      text-decoration: none;
-      display: block;
-      background: linear-gradient(135deg, #00e6a8, #00b383);
-      color: #000;
-    }
+.price {
+  text-align: center;
+  margin: 8px 0;
+  font-size: 16px;
+}
 
-    .btn:hover {
-      opacity: 0.9;
-    }
+.btn {
+  width: 100%;
+  padding: 14px;
+  margin-top: 10px;
+  border-radius: 10px;
+  border: none;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  background: linear-gradient(135deg,#00e6a8,#00b383);
+  color: #000;
+}
 
-    .pix-info {
-      font-size: 13px;
-      color: #ccc;
-      text-align: center;
-      margin-top: 6px;
-    }
+.btn-link {
+  text-decoration: none;
+  display: block;
+}
 
-    .whatsapp-btn {
-      background: #25D366;
-      color: #000;
-      margin-top: 25px;
-    }
+.pix-info {
+  text-align: center;
+  font-size: 13px;
+  color: #ccc;
+  margin-top: 6px;
+}
 
-    footer {
-      text-align: center;
-      font-size: 14px;
-      color: #aaa;
-      margin: 35px 0 20px;
-    }
-  </style>
+.whatsapp {
+  background: #25D366;
+  margin-top: 30px;
+}
 
-  <script>
-    function copiarPix() {
-      const pix = "trilheiros.roomt@gmail.com";
-      navigator.clipboard.writeText(pix).then(() => {
-        alert("Chave PIX copiada!");
-      });
-    }
-  </script>
+footer {
+  text-align: center;
+  font-size: 14px;
+  color: #aaa;
+  padding: 20px;
+}
+</style>
+
+<script>
+function copiarPix() {
+  navigator.clipboard.writeText("trilheiros.roomt@gmail.com");
+  alert("Chave PIX copiada!");
+}
+</script>
 </head>
 
 <body>
 
 <header>
-  <img src="https://i.imgur.com/b3zIN6n.jpeg" alt="Trilheiros Banner">
+  <img src="https://i.imgur.com/b3zIN6n.jpeg" alt="Banner Trilheiros">
 </header>
 
-<div class="container">
+<main>
 
-  <h1>Escolha sua forma de pagamento</h1>
+<h1>Escolha sua forma de pagamento</h1>
 
-  <!-- CASAL -->
-  <div class="card">
-    <h2>💑 Quarto de Casal</h2>
-    <p class="price">PIX: <strong>R$ 1.700,00</strong></p>
-    <button class="btn" onclick="copiarPix()">PAGAR VIA PIX</button>
-    <p class="pix-info">Caso seja outro valor, avise ao Jonatas.</p>
+<div class="card">
+  <h2>💑 Quarto de Casal</h2>
+  <p class="price">PIX: <strong>R$ 1.700,00</strong></p>
+  <button class="btn" onclick="copiarPix()">PAGAR VIA PIX</button>
+  <p class="pix-info">Caso seja outro valor, avise ao Jonatas.</p>
 
-    <p class="price">Cartão de crédito: <strong>R$ 1.800,00</strong></p>
-    <a class="btn" href="https://mpago.li/2WVGXFS" target="_blank">
-      PAGAR NO CARTÃO
-    </a>
-  </div>
-
-  <!-- COMPARTILHADO -->
-  <div class="card">
-    <h2>🛏️ Quarto Compartilhado</h2>
-    <p class="price">PIX: <strong>R$ 949,00</strong></p>
-    <button class="btn" onclick="copiarPix()">PAGAR VIA PIX</button>
-    <p class="pix-info">Caso seja outro valor, avise ao Jonatas.</p>
-
-    <p class="price">Cartão de crédito: <strong>R$ 969,00</strong></p>
-    <a class="btn" href="https://mpago.li/1j4rWra" target="_blank">
-      PAGAR NO CARTÃO
-    </a>
-  </div>
-
-  <!-- CAMPING -->
-  <div class="card">
-    <h2>⛺ Camping</h2>
-    <p class="price">PIX: <strong>R$ 879,00</strong></p>
-    <button class="btn" onclick="copiarPix()">PAGAR VIA PIX</button>
-    <p class="pix-info">Caso seja outro valor, avise ao Jonatas.</p>
-
-    <p class="price">Cartão de crédito: <strong>R$ 898,00</strong></p>
-    <a class="btn" href="https://mpago.li/11zHc3R" target="_blank">
-      PAGAR NO CARTÃO
-    </a>
-  </div>
-
-  <!-- WHATSAPP -->
-  <a 
-    class="btn whatsapp-btn" 
-    href="https://wa.me/5566996926174?text=Olá,%20já%20realizei%20o%20pagamento%20e%20estou%20enviando%20o%20comprovante."
-    target="_blank">
-    📲 ENVIAR COMPROVANTE NO WHATSAPP
-  </a>
-
+  <p class="price">Cartão: <strong>R$ 1.800,00</strong></p>
+  <a class="btn btn-link" href="https://mpago.li/2WVGXFS" target="_blank">PAGAR NO CARTÃO</a>
 </div>
 
+<div class="card">
+  <h2>🛏️ Quarto Compartilhado</h2>
+  <p class="price">PIX: <strong>R$ 949,00</strong></p>
+  <button class="btn" onclick="copiarPix()">PAGAR VIA PIX</button>
+  <p class="pix-info">Caso seja outro valor, avise ao Jonatas.</p>
+
+  <p class="price">Cartão: <strong>R$ 969,00</strong></p>
+  <a class="btn btn-link" href="https://mpago.li/1j4rWra" target="_blank">PAGAR NO CARTÃO</a>
+</div>
+
+<div class="card">
+  <h2>⛺ Camping</h2>
+  <p class="price">PIX: <strong>R$ 879,00</strong></p>
+  <button class="btn" onclick="copiarPix()">PAGAR VIA PIX</button>
+  <p class="pix-info">Caso seja outro valor, avise ao Jonatas.</p>
+
+  <p class="price">Cartão: <strong>R$ 898,00</strong></p>
+  <a class="btn btn-link" href="https://mpago.li/11zHc3R" target="_blank">PAGAR NO CARTÃO</a>
+</div>
+
+<a class="btn whatsapp btn-link"
+href="https://wa.me/5566996926174?text=Olá,%20já%20realizei%20o%20pagamento%20e%20estou%20enviando%20o%20comprovante."
+target="_blank">
+📲 ENVIAR COMPROVANTE NO WHATSAPP
+</a>
+
+</main>
+
 <footer>
-  🌿 Trilheiros de Rondonópolis • Ninguém fica pra trás
+🌿 Trilheiros de Rondonópolis • Ninguém fica pra trás
 </footer>
 
 </body>
 </html>
-
 
