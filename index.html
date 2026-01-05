@@ -1,126 +1,174 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Confirmação de Vaga - Trilheiros</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pagamentos | Trilheiros</title>
 
-<style>
+  <style>
     body {
-        background:#0d0d0d;
-        color:white;
-        font-family: Arial;
-        text-align:center;
-        padding:20px;
+      margin: 0;
+      font-family: "Segoe UI", Arial, sans-serif;
+      background-color: #000;
+      color: #f1f1f1;
     }
-    img {
-        width:100%;
-        max-width:650px;
-        border-radius:12px;
-        margin-top:10px;
+
+    header img {
+      width: 100%;
+      max-height: 320px;
+      object-fit: cover;
     }
-    input {
-        width:90%;
-        max-width:320px;
-        padding:12px;
-        background:#1a1a1a;
-        border:1px solid #444;
-        color:white;
-        border-radius:8px;
-        margin-top:20px;
+
+    .container {
+      max-width: 900px;
+      margin: auto;
+      padding: 25px;
     }
-    button {
-        width:90%;
-        max-width:330px;
-        padding:14px;
-        border:none;
-        border-radius:10px;
-        margin-top:20px;
-        font-weight:bold;
-        cursor:pointer;
+
+    h1 {
+      text-align: center;
+      margin-bottom: 30px;
+      color: #00e6a8;
+      font-size: 28px;
     }
-    #confirmar { background:#1e90ff; display:none; }
-    #grupo { background:#28a745; display:none; }
-    #vagasMsg { color:red; font-size:22px; display:none; margin-top:20px; }
-</style>
+
+    .card {
+      background: #111;
+      border-radius: 14px;
+      padding: 22px;
+      margin-bottom: 25px;
+      border: 1px solid #222;
+      box-shadow: 0 0 20px rgba(0, 230, 168, 0.08);
+    }
+
+    .card h2 {
+      text-align: center;
+      margin-bottom: 15px;
+      color: #00e6a8;
+      font-size: 22px;
+    }
+
+    .price {
+      font-size: 16px;
+      margin: 6px 0;
+      text-align: center;
+    }
+
+    .btn {
+      width: 100%;
+      padding: 14px;
+      margin-top: 12px;
+      border-radius: 10px;
+      font-size: 16px;
+      font-weight: bold;
+      border: none;
+      cursor: pointer;
+      text-align: center;
+      text-decoration: none;
+      display: block;
+      background: linear-gradient(135deg, #00e6a8, #00b383);
+      color: #000;
+    }
+
+    .btn:hover {
+      opacity: 0.9;
+    }
+
+    .pix-info {
+      font-size: 13px;
+      color: #ccc;
+      text-align: center;
+      margin-top: 6px;
+    }
+
+    .whatsapp-btn {
+      background: #25D366;
+      color: #000;
+      margin-top: 25px;
+    }
+
+    footer {
+      text-align: center;
+      font-size: 14px;
+      color: #aaa;
+      margin: 35px 0 20px;
+    }
+  </style>
+
+  <script>
+    function copiarPix() {
+      const pix = "trilheiros.roomt@gmail.com";
+      navigator.clipboard.writeText(pix).then(() => {
+        alert("Chave PIX copiada!");
+      });
+    }
+  </script>
 </head>
 
 <body>
 
-<img src="https://i.imgur.com/DmIodge.jpeg">
+<header>
+  <img src="https://i.imgur.com/b3zIN6n.jpeg" alt="Trilheiros Banner">
+</header>
 
-<h2>Confirme sua vaga no passeio</h2>
-<p>Digite seu nome para continuar</p>
+<div class="container">
 
-<input type="text" id="nome" placeholder="Seu nome">
+  <h1>Escolha sua forma de pagamento</h1>
 
-<button style="background:#28a745;" onclick="mostrarConfirmar()">Avançar</button>
+  <!-- CASAL -->
+  <div class="card">
+    <h2>💑 Quarto de Casal</h2>
+    <p class="price">PIX: <strong>R$ 1.700,00</strong></p>
+    <button class="btn" onclick="copiarPix()">PAGAR VIA PIX</button>
+    <p class="pix-info">Caso seja outro valor, avise ao Jonatas.</p>
 
-<button id="confirmar" onclick="confirmarVaga()">Clique aqui para confirmar</button>
+    <p class="price">Cartão de crédito: <strong>R$ 1.800,00</strong></p>
+    <a class="btn" href="https://mpago.li/2WVGXFS" target="_blank">
+      PAGAR NO CARTÃO
+    </a>
+  </div>
 
-<a href="https://chat.whatsapp.com/F9BokOclCnuDi8LBo15SVZ" target="_blank">
-    <button id="grupo">Entrar no grupo do passeio</button>
-</a>
+  <!-- COMPARTILHADO -->
+  <div class="card">
+    <h2>🛏️ Quarto Compartilhado</h2>
+    <p class="price">PIX: <strong>R$ 949,00</strong></p>
+    <button class="btn" onclick="copiarPix()">PAGAR VIA PIX</button>
+    <p class="pix-info">Caso seja outro valor, avise ao Jonatas.</p>
 
-<div id="vagasMsg">🚫 Vagas preenchidas</div>
+    <p class="price">Cartão de crédito: <strong>R$ 969,00</strong></p>
+    <a class="btn" href="https://mpago.li/1j4rWra" target="_blank">
+      PAGAR NO CARTÃO
+    </a>
+  </div>
 
-<!-- Firebase V8 (compatível com GitHub Pages) -->
-<script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
-<script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-database.js"></script>
+  <!-- CAMPING -->
+  <div class="card">
+    <h2>⛺ Camping</h2>
+    <p class="price">PIX: <strong>R$ 879,00</strong></p>
+    <button class="btn" onclick="copiarPix()">PAGAR VIA PIX</button>
+    <p class="pix-info">Caso seja outro valor, avise ao Jonatas.</p>
 
-<script>
-// Configuração Firebase
-var firebaseConfig = {
-  apiKey: "AIzaSyBF5IQNfZM7ggUhY6sNB7nHdQOWBv7y-xM",
-  authDomain: "vilabela-98898.firebaseapp.com",
-  databaseURL: "https://vilabela-98898-default-rtdb.firebaseio.com",
-  projectId: "vilabela-98898",
-  storageBucket: "vilabela-98898.firebasestorage.app",
-  messagingSenderId: "79333145466",
-  appId: "1:79333145466:web:6c4341cb2497731b20b4c3"
-};
+    <p class="price">Cartão de crédito: <strong>R$ 898,00</strong></p>
+    <a class="btn" href="https://mpago.li/11zHc3R" target="_blank">
+      PAGAR NO CARTÃO
+    </a>
+  </div>
 
-// Inicializar Firebase
-firebase.initializeApp(firebaseConfig);
-var db = firebase.database();
+  <!-- WHATSAPP -->
+  <a 
+    class="btn whatsapp-btn" 
+    href="https://wa.me/5566996926174?text=Olá,%20já%20realizei%20o%20pagamento%20e%20estou%20enviando%20o%20comprovante."
+    target="_blank">
+    📲 ENVIAR COMPROVANTE NO WHATSAPP
+  </a>
 
-function mostrarConfirmar() {
-    let nome = document.getElementById("nome").value.trim();
-    if (nome.length < 2) {
-        alert("Digite um nome válido.");
-        return;
-    }
-    document.getElementById("confirmar").style.display = "block";
-}
+</div>
 
-function confirmarVaga() {
-    let ref = db.ref("vagas");
-
-    ref.once("value").then((snap) => {
-        let data = snap.val();
-
-        if (!data) {
-            alert("Erro ao carregar vagas.");
-            return;
-        }
-
-        let atual = data.confirmacoes;
-        let limite = data.limite;
-
-        if (atual >= limite) {
-            document.getElementById("vagasMsg").style.display = "block";
-            document.getElementById("confirmar").style.display = "none";
-            return;
-        }
-
-        ref.update({ confirmacoes: atual + 1 });
-
-        document.getElementById("grupo").style.display = "block";
-        document.getElementById("confirmar").innerText = "Confirmado ✔️";
-    });
-}
-</script>
+<footer>
+  🌿 Trilheiros de Rondonópolis • Ninguém fica pra trás
+</footer>
 
 </body>
 </html>
+
 
