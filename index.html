@@ -6,9 +6,7 @@
 <title>Pagamentos | Trilheiros</title>
 
 <style>
-* {
-  box-sizing: border-box;
-}
+* { box-sizing: border-box; }
 
 body {
   margin: 0;
@@ -17,7 +15,6 @@ body {
   color: #ffffff;
 }
 
-/* BANNER RESPONSIVO */
 header {
   width: 100%;
   max-height: 220px;
@@ -28,10 +25,8 @@ header img {
   width: 100%;
   height: 220px;
   object-fit: cover;
-  display: block;
 }
 
-/* CONTEÚDO */
 main {
   padding: 20px 15px 30px;
 }
@@ -43,7 +38,6 @@ h1 {
   font-size: 22px;
 }
 
-/* CARDS */
 .card {
   background-color: #111;
   border: 1px solid #222;
@@ -62,6 +56,13 @@ h1 {
   text-align: center;
   margin: 6px 0;
   font-size: 15px;
+}
+
+.parcela {
+  text-align: center;
+  font-size: 14px;
+  color: #ccc;
+  margin-bottom: 6px;
 }
 
 .btn {
@@ -90,29 +91,17 @@ h1 {
   margin-top: 6px;
 }
 
-/* WHATSAPP */
 .whatsapp {
   background: #25D366;
   margin-top: 25px;
   font-size: 16px;
 }
 
-/* FOOTER */
 footer {
   text-align: center;
   font-size: 13px;
   color: #aaa;
   padding: 15px 10px;
-}
-
-/* DESKTOP */
-@media (min-width: 768px) {
-  header img {
-    height: 260px;
-  }
-  h1 {
-    font-size: 26px;
-  }
 }
 </style>
 
@@ -134,33 +123,39 @@ function copiarPix() {
 
 <h1>Escolha sua forma de pagamento</h1>
 
+<!-- CASAL -->
 <div class="card">
   <h2>💑 Quarto de Casal</h2>
-  <p class="price">PIX: <strong>R$ 1.700,00</strong></p>
+  <p class="price">PIX à vista: <strong>R$ 1.700,00</strong></p>
+  <p class="parcela">PIX parcelado: <strong>4x de R$ 425,00</strong></p>
   <button class="btn" onclick="copiarPix()">PAGAR VIA PIX</button>
   <p class="pix-info">Caso seja outro valor, avise ao Jonatas.</p>
 
-  <p class="price">Cartão: <strong>R$ 1.800,00</strong></p>
+  <p class="price">Cartão de crédito: <strong>R$ 1.800,00</strong></p>
   <a class="btn btn-link" href="https://mpago.li/2WVGXFS" target="_blank">PAGAR NO CARTÃO</a>
 </div>
 
+<!-- COMPARTILHADO -->
 <div class="card">
   <h2>🛏️ Quarto Compartilhado</h2>
-  <p class="price">PIX: <strong>R$ 949,00</strong></p>
+  <p class="price">PIX à vista: <strong>R$ 949,00</strong></p>
+  <p class="parcela">PIX parcelado: <strong>4x de R$ 237,25</strong></p>
   <button class="btn" onclick="copiarPix()">PAGAR VIA PIX</button>
   <p class="pix-info">Caso seja outro valor, avise ao Jonatas.</p>
 
-  <p class="price">Cartão: <strong>R$ 969,00</strong></p>
+  <p class="price">Cartão de crédito: <strong>R$ 969,00</strong></p>
   <a class="btn btn-link" href="https://mpago.li/1j4rWra" target="_blank">PAGAR NO CARTÃO</a>
 </div>
 
+<!-- CAMPING -->
 <div class="card">
   <h2>⛺ Camping</h2>
-  <p class="price">PIX: <strong>R$ 879,00</strong></p>
+  <p class="price">PIX à vista: <strong>R$ 879,00</strong></p>
+  <p class="parcela">PIX parcelado: <strong>4x de R$ 219,75</strong></p>
   <button class="btn" onclick="copiarPix()">PAGAR VIA PIX</button>
   <p class="pix-info">Caso seja outro valor, avise ao Jonatas.</p>
 
-  <p class="price">Cartão: <strong>R$ 898,00</strong></p>
+  <p class="price">Cartão de crédito: <strong>R$ 898,00</strong></p>
   <a class="btn btn-link" href="https://mpago.li/11zHc3R" target="_blank">PAGAR NO CARTÃO</a>
 </div>
 
@@ -178,5 +173,4 @@ target="_blank">
 
 </body>
 </html>
-
 
