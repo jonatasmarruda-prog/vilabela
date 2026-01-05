@@ -15,41 +15,52 @@ body {
   color: #ffffff;
 }
 
-header {
-  width: 100%;
-  max-height: 220px;
-  overflow: hidden;
-}
-
+/* BANNER */
 header img {
   width: 100%;
-  height: 220px;
-  object-fit: cover;
+  height: auto;
+  display: block;
 }
 
+/* CONTEÚDO */
 main {
   padding: 20px 15px 30px;
 }
 
 h1 {
   text-align: center;
-  color: #00e6a8;
-  margin-bottom: 25px;
+  color: #39ff14;
+  margin-bottom: 15px;
   font-size: 22px;
+  text-shadow: 0 0 8px #39ff14;
 }
 
-.card {
-  background-color: #111;
-  border: 1px solid #222;
+/* ALERTA */
+.alert {
+  background: #111;
+  border: 1px solid #39ff14;
   border-radius: 12px;
+  padding: 15px;
+  text-align: center;
+  margin-bottom: 25px;
+  box-shadow: 0 0 12px rgba(57,255,20,0.25);
+}
+
+/* CARDS */
+.card {
+  background-color: #0b0b0b;
+  border: 1px solid #1f1f1f;
+  border-radius: 14px;
   padding: 18px;
   margin-bottom: 20px;
+  box-shadow: 0 0 12px rgba(57,255,20,0.15);
 }
 
 .card h2 {
   text-align: center;
-  color: #00e6a8;
+  color: #39ff14;
   font-size: 18px;
+  text-shadow: 0 0 6px #39ff14;
 }
 
 .price {
@@ -61,27 +72,28 @@ h1 {
 .parcela {
   text-align: center;
   font-size: 14px;
-  color: #ccc;
-  margin-bottom: 6px;
+  color: #bfbfbf;
 }
 
+/* BOTÕES */
 .btn {
   width: 100%;
-  padding: 14px;
+  padding: 15px;
   margin-top: 10px;
-  border-radius: 10px;
+  border-radius: 12px;
   border: none;
   font-size: 15px;
   font-weight: bold;
   cursor: pointer;
-  background: linear-gradient(135deg,#00e6a8,#00b383);
+  background: #39ff14;
   color: #000;
+  text-align: center;
+  text-decoration: none;
+  box-shadow: 0 0 8px #39ff14, 0 0 16px #39ff14;
 }
 
-.btn-link {
-  display: block;
-  text-decoration: none;
-  text-align: center;
+.btn:hover {
+  filter: brightness(1.1);
 }
 
 .pix-info {
@@ -91,17 +103,54 @@ h1 {
   margin-top: 6px;
 }
 
-.whatsapp {
-  background: #25D366;
-  margin-top: 25px;
-  font-size: 16px;
+/* BLOCOS INFO */
+.trust {
+  background: #111;
+  border-radius: 14px;
+  padding: 20px;
+  margin: 25px 0;
+  border: 1px solid #222;
 }
 
+.trust h3 {
+  text-align: center;
+  color: #39ff14;
+  margin-bottom: 15px;
+}
+
+.trust ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.trust li {
+  padding: 6px 0;
+  font-size: 15px;
+}
+
+/* WHATSAPP FLUTUANTE */
+.whatsapp-float {
+  position: fixed;
+  bottom: 18px;
+  right: 18px;
+  background: #25D366;
+  color: #000;
+  padding: 14px 18px;
+  border-radius: 50px;
+  font-weight: bold;
+  text-decoration: none;
+  box-shadow: 0 0 10px #25D366, 0 0 20px rgba(37,211,102,0.7);
+  z-index: 999;
+  font-size: 15px;
+}
+
+/* FOOTER */
 footer {
   text-align: center;
   font-size: 13px;
   color: #aaa;
-  padding: 15px 10px;
+  padding: 20px 10px;
 }
 </style>
 
@@ -123,6 +172,11 @@ function copiarPix() {
 
 <h1>Escolha sua forma de pagamento</h1>
 
+<div class="alert">
+  ⚠️ <strong>Vagas limitadas</strong><br>
+  42 vagas totais • 30 camas • 15 vagas camping
+</div>
+
 <!-- CASAL -->
 <div class="card">
   <h2>💑 Quarto de Casal</h2>
@@ -132,7 +186,7 @@ function copiarPix() {
   <p class="pix-info">Caso seja outro valor, avise ao Jonatas.</p>
 
   <p class="price">Cartão de crédito: <strong>R$ 1.800,00</strong></p>
-  <a class="btn btn-link" href="https://mpago.li/2WVGXFS" target="_blank">PAGAR NO CARTÃO</a>
+  <a class="btn" href="https://mpago.li/2WVGXFS" target="_blank">PAGAR NO CARTÃO</a>
 </div>
 
 <!-- COMPARTILHADO -->
@@ -144,7 +198,7 @@ function copiarPix() {
   <p class="pix-info">Caso seja outro valor, avise ao Jonatas.</p>
 
   <p class="price">Cartão de crédito: <strong>R$ 969,00</strong></p>
-  <a class="btn btn-link" href="https://mpago.li/1j4rWra" target="_blank">PAGAR NO CARTÃO</a>
+  <a class="btn" href="https://mpago.li/1j4rWra" target="_blank">PAGAR NO CARTÃO</a>
 </div>
 
 <!-- CAMPING -->
@@ -156,16 +210,40 @@ function copiarPix() {
   <p class="pix-info">Caso seja outro valor, avise ao Jonatas.</p>
 
   <p class="price">Cartão de crédito: <strong>R$ 898,00</strong></p>
-  <a class="btn btn-link" href="https://mpago.li/11zHc3R" target="_blank">PAGAR NO CARTÃO</a>
+  <a class="btn" href="https://mpago.li/11zHc3R" target="_blank">PAGAR NO CARTÃO</a>
 </div>
 
-<a class="btn whatsapp btn-link"
-href="https://wa.me/5566996926174?text=Olá,%20já%20realizei%20o%20pagamento%20e%20estou%20enviando%20o%20comprovante."
-target="_blank">
-📲 ENVIAR COMPROVANTE NO WHATSAPP
-</a>
+<!-- INCLUSO -->
+<div class="trust">
+  <h3>✔️ O que está incluso</h3>
+  <ul>
+    <li>🚍 Transporte ida e volta</li>
+    <li>☕ Café da manhã</li>
+    <li>🍽️ Jantar</li>
+    <li>🏨 Opção de hospedagem</li>
+    <li>🧭 Condutor local</li>
+    <li>🛡️ Seguro de vida</li>
+    <li>🏞️ Acesso aos atrativos</li>
+  </ul>
+</div>
+
+<!-- NÃO INCLUSO -->
+<div class="trust">
+  <h3>❌ O que não está incluso</h3>
+  <ul>
+    <li>🍛 Almoço</li>
+    <li>🥤 Bebidas extras</li>
+    <li>🛍️ Gastos pessoais</li>
+  </ul>
+</div>
 
 </main>
+
+<a class="whatsapp-float"
+href="https://wa.me/5566996926174?text=Olá,%20já%20realizei%20o%20pagamento%20e%20estou%20enviando%20o%20comprovante."
+target="_blank">
+📲 WhatsApp
+</a>
 
 <footer>
 🌿 Trilheiros de Rondonópolis • Ninguém fica pra trás
