@@ -1,484 +1,275 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Pagamento | Trilheiros de Rondonópolis</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Reserva | Trilheiros</title>
 
-  <style>
-    * {
-      box-sizing: border-box;
-      -webkit-tap-highlight-color: transparent;
-    }
+<style>
+* { box-sizing: border-box; }
 
-    :root {
-      --bg: #050505;
-      --card: rgba(17, 17, 17, 0.92);
-      --card-border: rgba(255, 255, 255, 0.06);
-      --text: #ffffff;
-      --muted: #b8b8b8;
-      --soft: #8f8f8f;
-      --green: #39ff14;
-      --green-dark: #22c30a;
-      --shadow: 0 12px 30px rgba(0, 0, 0, 0.35);
-      --radius: 24px;
-    }
+body {
+  margin: 0;
+  font-family: Arial, Helvetica, sans-serif;
+  background: #050505;
+  color: #fff;
+}
 
-    html {
-      scroll-behavior: smooth;
-    }
+/* BANNER */
+header img {
+  width: 100%;
+  border-bottom-left-radius: 24px;
+  border-bottom-right-radius: 24px;
+}
 
-    body {
-      margin: 0;
-      font-family: Arial, Helvetica, sans-serif;
-      background:
-        radial-gradient(circle at top, rgba(57,255,20,0.08), transparent 28%),
-        linear-gradient(180deg, #020202 0%, #070707 50%, #000000 100%);
-      color: var(--text);
-      overflow-x: hidden;
-    }
+/* CONTEÚDO */
+main {
+  max-width: 520px;
+  margin: auto;
+  padding: 20px 15px 30px;
+}
 
-    header {
-      position: relative;
-      overflow: hidden;
-    }
+h1 {
+  text-align: center;
+  font-size: 26px;
+  margin-bottom: 8px;
+  font-weight: 900;
+}
 
-    header img {
-      width: 100%;
-      display: block;
-      height: auto;
-      border-bottom-left-radius: 28px;
-      border-bottom-right-radius: 28px;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.4);
-    }
+.subtitle {
+  text-align: center;
+  color: #bbb;
+  font-size: 14px;
+  margin-bottom: 25px;
+}
 
-    .overlay-top {
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(to bottom, rgba(0,0,0,0.12), rgba(0,0,0,0.4));
-      pointer-events: none;
-    }
+/* CARD */
+.card {
+  background: #0f0f0f;
+  border: 1px solid #1f1f1f;
+  border-radius: 18px;
+  padding: 18px;
+  margin-bottom: 20px;
+}
 
-    main {
-      max-width: 540px;
-      margin: 0 auto;
-      padding: 18px 14px 110px;
-    }
+.card h2 {
+  text-align: center;
+  margin-bottom: 15px;
+  font-size: 20px;
+}
 
-    .hero {
-      text-align: center;
-      margin: 12px 0 24px;
-    }
+/* PREÇO */
+.price-box {
+  background: #111;
+  border-radius: 12px;
+  padding: 14px;
+  text-align: center;
+  margin-bottom: 10px;
+}
 
-    .hero h1 {
-      margin: 0 0 10px;
-      font-size: 29px;
-      line-height: 1.12;
-      font-weight: 900;
-      letter-spacing: 0.4px;
-      color: #fff;
-      text-shadow:
-        0 1px 0 rgba(255,255,255,0.1),
-        0 3px 18px rgba(57,255,20,0.18);
-    }
+.label {
+  font-size: 13px;
+  color: #aaa;
+}
 
-    .hero p {
-      margin: 0;
-      color: var(--muted);
-      font-size: 15px;
-      line-height: 1.6;
-    }
+.pix-value {
+  font-size: 40px;
+  font-weight: 900;
+  color: #39ff14;
+}
 
-    .card {
-      position: relative;
-      background: linear-gradient(180deg, rgba(18,18,18,0.96), rgba(10,10,10,0.96));
-      border: 1px solid var(--card-border);
-      border-radius: var(--radius);
-      padding: 22px 16px 18px;
-      margin-bottom: 22px;
-      box-shadow: var(--shadow);
-      overflow: hidden;
-      backdrop-filter: blur(8px);
-    }
+.credit-value {
+  font-size: 28px;
+  font-weight: 800;
+}
 
-    .card::before {
-      content: "";
-      position: absolute;
-      top: -50px;
-      right: -40px;
-      width: 150px;
-      height: 150px;
-      background: radial-gradient(circle, rgba(57,255,20,0.10), transparent 70%);
-      border-radius: 50%;
-      pointer-events: none;
-    }
+/* BOTÕES */
+.btn {
+  width: 100%;
+  padding: 15px;
+  margin-top: 10px;
+  border-radius: 12px;
+  border: none;
+  font-weight: bold;
+  cursor: pointer;
+  text-align: center;
+  text-decoration: none;
+}
 
-    .card h2 {
-      margin: 0 0 16px;
-      text-align: center;
-      font-size: 24px;
-      font-weight: 900;
-      color: #fff;
-      letter-spacing: 0.3px;
-      text-shadow: 0 2px 10px rgba(57,255,20,0.15);
-      position: relative;
-      z-index: 1;
-    }
+.btn-pix {
+  background: #39ff14;
+  color: #000;
+}
 
-    .badge {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      margin: 0 auto 16px;
-      background: linear-gradient(135deg, var(--green), #b4ff55);
-      color: #000;
-      font-size: 12px;
-      font-weight: 900;
-      padding: 8px 14px;
-      border-radius: 999px;
-      box-shadow: 0 0 18px rgba(57,255,20,0.28);
-      position: relative;
-      left: 50%;
-      transform: translateX(-50%);
-      z-index: 1;
-    }
+.btn-card {
+  background: transparent;
+  border: 1px solid #39ff14;
+  color: #39ff14;
+}
 
-    .price-box {
-      background: rgba(255,255,255,0.03);
-      border: 1px solid rgba(255,255,255,0.06);
-      border-radius: 20px;
-      padding: 16px 14px;
-      margin: 12px 0;
-      text-align: center;
-      position: relative;
-      z-index: 1;
-    }
+/* INFO */
+.pix-info {
+  text-align: center;
+  font-size: 12px;
+  color: #999;
+  margin-top: 6px;
+}
 
-    .label {
-      font-size: 13px;
-      color: #d0d0d0;
-      text-transform: uppercase;
-      letter-spacing: 0.8px;
-      margin-bottom: 8px;
-      font-weight: 700;
-    }
+/* BLOCOS */
+.section {
+  background: #111;
+  border-radius: 16px;
+  padding: 18px;
+  margin-top: 20px;
+}
 
-    .pix-value {
-      font-size: 34px;
-      font-weight: 900;
-      color: var(--green);
-      line-height: 1;
-      letter-spacing: -0.5px;
-      text-shadow:
-        0 0 14px rgba(57,255,20,0.18),
-        0 1px 0 rgba(255,255,255,0.12);
-    }
+.section h3 {
+  text-align: center;
+  margin-bottom: 10px;
+}
 
-    .credit-value {
-      font-size: 30px;
-      font-weight: 900;
-      color: #ffffff;
-      line-height: 1;
-      letter-spacing: -0.5px;
-    }
+.section li {
+  margin: 8px 0;
+}
 
-    .subtext {
-      margin-top: 9px;
-      font-size: 13px;
-      color: #9ee98e;
-      font-weight: 700;
-    }
+/* BOTÃO FINAL FIXO */
+.footer-action {
+  position: relative;
+  padding: 20px 15px 30px;
+}
 
-    .btn {
-      width: 100%;
-      border: none;
-      border-radius: 18px;
-      padding: 16px;
-      font-size: 15px;
-      font-weight: 900;
-      text-align: center;
-      text-decoration: none;
-      display: block;
-      cursor: pointer;
-      transition: transform 0.18s ease, filter 0.18s ease, box-shadow 0.18s ease;
-      margin-top: 12px;
-      position: relative;
-      z-index: 1;
-    }
+.whatsapp-btn {
+  display: block;
+  width: 100%;
+  max-width: 520px;
+  margin: auto;
+  background: #25D366;
+  color: #000;
+  padding: 16px;
+  text-align: center;
+  border-radius: 14px;
+  font-weight: bold;
+  text-decoration: none;
+  font-size: 16px;
+}
 
-    .btn:active {
-      transform: scale(0.98);
-    }
+/* FOOTER */
+footer {
+  text-align: center;
+  font-size: 13px;
+  color: #aaa;
+  padding: 20px 10px;
+}
+</style>
 
-    .btn-pix {
-      background: linear-gradient(135deg, var(--green), #a5ff48);
-      color: #000;
-      box-shadow:
-        0 10px 24px rgba(57,255,20,0.18),
-        0 0 16px rgba(57,255,20,0.18);
-    }
-
-    .btn-pix:hover {
-      filter: brightness(1.04);
-      transform: translateY(-1px);
-    }
-
-    .btn-card {
-      background: rgba(255,255,255,0.03);
-      border: 1px solid rgba(57,255,20,0.22);
-      color: var(--green);
-      box-shadow: 0 0 10px rgba(57,255,20,0.06);
-    }
-
-    .btn-card:hover {
-      background: rgba(57,255,20,0.08);
-      transform: translateY(-1px);
-    }
-
-    .pix-info {
-      text-align: center;
-      font-size: 12px;
-      color: var(--soft);
-      margin-top: 8px;
-      line-height: 1.6;
-      position: relative;
-      z-index: 1;
-    }
-
-    .section-box {
-      background: var(--card);
-      border: 1px solid var(--card-border);
-      border-radius: 24px;
-      padding: 20px 18px;
-      margin: 24px 0;
-      box-shadow: var(--shadow);
-      backdrop-filter: blur(8px);
-    }
-
-    .section-box h3 {
-      margin: 0 0 16px;
-      text-align: center;
-      font-size: 20px;
-      color: #fff;
-      text-shadow: 0 0 10px rgba(57,255,20,0.12);
-    }
-
-    .section-box ul {
-      list-style: none;
-      padding: 0;
-      margin: 0;
-    }
-
-    .section-box li {
-      padding: 11px 0;
-      border-bottom: 1px solid rgba(255,255,255,0.05);
-      font-size: 15px;
-      color: #f1f1f1;
-    }
-
-    .section-box li:last-child {
-      border-bottom: none;
-    }
-
-    .safe-box {
-      background: linear-gradient(180deg, rgba(16,16,16,0.95), rgba(9,9,9,0.95));
-      border: 1px solid rgba(57,255,20,0.10);
-      border-radius: 24px;
-      padding: 18px 16px;
-      margin-top: 22px;
-      text-align: center;
-      box-shadow: var(--shadow);
-    }
-
-    .safe-box h3 {
-      margin: 0 0 10px;
-      font-size: 18px;
-      color: var(--green);
-    }
-
-    .safe-box p {
-      margin: 0;
-      color: var(--muted);
-      font-size: 14px;
-      line-height: 1.7;
-    }
-
-    .whatsapp-fixed {
-      position: fixed;
-      left: 14px;
-      right: 14px;
-      bottom: 14px;
-      z-index: 999;
-      background: linear-gradient(135deg, #25D366, #53f18a);
-      color: #000;
-      text-decoration: none;
-      font-weight: 900;
-      font-size: 16px;
-      text-align: center;
-      padding: 17px 18px;
-      border-radius: 20px;
-      box-shadow:
-        0 14px 34px rgba(37,211,102,0.28),
-        0 0 18px rgba(37,211,102,0.18);
-      transition: transform 0.18s ease, filter 0.18s ease;
-    }
-
-    .whatsapp-fixed:hover {
-      filter: brightness(1.03);
-      transform: translateY(-1px);
-    }
-
-    footer {
-      text-align: center;
-      font-size: 13px;
-      color: #989898;
-      padding: 20px 16px 6px;
-      line-height: 1.7;
-    }
-
-    @media (min-width: 700px) {
-      .whatsapp-fixed {
-        max-width: 460px;
-        margin: auto;
-        left: 50%;
-        right: auto;
-        transform: translateX(-50%);
-      }
-
-      .whatsapp-fixed:hover {
-        transform: translateX(-50%) translateY(-1px);
-      }
-    }
-  </style>
-
-  <script>
-    function copiarPix() {
-      navigator.clipboard.writeText("trilheiros.roomt@gmail.com");
-      alert("Chave PIX copiada com sucesso!");
-    }
-  </script>
+<script>
+function copiarPix() {
+  navigator.clipboard.writeText("trilheiros.roomt@gmail.com");
+  alert("Chave PIX copiada!");
+}
+</script>
 </head>
+
 <body>
 
-  <header>
-    <img src="https://i.imgur.com/b3zIN6n.jpeg" alt="Banner Trilheiros">
-    <div class="overlay-top"></div>
-  </header>
+<header>
+<img src="https://i.imgur.com/b3zIN6n.jpeg">
+</header>
 
-  <main>
+<main>
 
-    <section class="hero">
-      <h1>Escolha sua forma de pagamento</h1>
-      <p>Finalize sua reserva com segurança e praticidade.</p>
-    </section>
+<h1>Garanta sua vaga agora</h1>
+<p class="subtitle">Experiência em Vila Bela da Santíssima Trindade</p>
 
-    <!-- QUARTO CASAL -->
-    <div class="card">
-      <div class="badge">MELHOR VALOR NO PIX</div>
-      <h2>💑 Quarto de Casal</h2>
+<!-- CASAL -->
+<div class="card">
+  <h2>💑 Quarto de Casal</h2>
 
-      <div class="price-box">
-        <div class="label">Pagamento via PIX</div>
-        <div class="pix-value">R$ 1.700,00</div>
-        <div class="subtext">Valor total da reserva</div>
-      </div>
+  <div class="price-box">
+    <div class="label">Valor à vista no PIX</div>
+    <div class="pix-value">R$ 1.700</div>
+  </div>
 
-      <button class="btn btn-pix" onclick="copiarPix()">PAGAR VIA PIX</button>
-      <p class="pix-info">Após o pagamento, envie o comprovante no WhatsApp.</p>
+  <button class="btn btn-pix" onclick="copiarPix()">GARANTIR VAGA NO PIX</button>
+  <p class="pix-info">Envie o comprovante após pagamento</p>
 
-      <div class="price-box">
-        <div class="label">Cartão de crédito</div>
-        <div class="credit-value">R$ 1.800,00</div>
-      </div>
+  <div class="price-box">
+    <div class="label">Pagamento no cartão</div>
+    <div class="credit-value">R$ 1.800</div>
+  </div>
 
-      <a class="btn btn-card" href="https://mpago.li/2WVGXFS" target="_blank">PAGAR NO CARTÃO</a>
-    </div>
+  <a class="btn btn-card" href="https://mpago.li/2WVGXFS" target="_blank">PAGAR NO CARTÃO</a>
+</div>
 
-    <!-- QUARTO COMPARTILHADO -->
-    <div class="card">
-      <h2>🛏️ Quarto Compartilhado</h2>
+<!-- COMPARTILHADO -->
+<div class="card">
+  <h2>🛏️ Compartilhado</h2>
 
-      <div class="price-box">
-        <div class="label">Pagamento via PIX</div>
-        <div class="pix-value">R$ 949,00</div>
-        <div class="subtext">Valor total da reserva</div>
-      </div>
+  <div class="price-box">
+    <div class="label">Valor à vista no PIX</div>
+    <div class="pix-value">R$ 949</div>
+  </div>
 
-      <button class="btn btn-pix" onclick="copiarPix()">PAGAR VIA PIX</button>
-      <p class="pix-info">Após o pagamento, envie o comprovante no WhatsApp.</p>
+  <button class="btn btn-pix" onclick="copiarPix()">GARANTIR VAGA NO PIX</button>
 
-      <div class="price-box">
-        <div class="label">Cartão de crédito</div>
-        <div class="credit-value">R$ 969,00</div>
-      </div>
+  <div class="price-box">
+    <div class="label">Pagamento no cartão</div>
+    <div class="credit-value">R$ 969</div>
+  </div>
 
-      <a class="btn btn-card" href="https://mpago.li/1j4rWra" target="_blank">PAGAR NO CARTÃO</a>
-    </div>
+  <a class="btn btn-card" href="https://mpago.li/1j4rWra" target="_blank">PAGAR NO CARTÃO</a>
+</div>
 
-    <!-- CAMPING -->
-    <div class="card">
-      <h2>⛺ Camping</h2>
+<!-- CAMPING -->
+<div class="card">
+  <h2>⛺ Camping</h2>
 
-      <div class="price-box">
-        <div class="label">Pagamento via PIX</div>
-        <div class="pix-value">R$ 879,00</div>
-        <div class="subtext">Valor total da reserva</div>
-      </div>
+  <div class="price-box">
+    <div class="label">Valor à vista no PIX</div>
+    <div class="pix-value">R$ 879</div>
+  </div>
 
-      <button class="btn btn-pix" onclick="copiarPix()">PAGAR VIA PIX</button>
-      <p class="pix-info">Após o pagamento, envie o comprovante no WhatsApp.</p>
+  <button class="btn btn-pix" onclick="copiarPix()">GARANTIR VAGA NO PIX</button>
 
-      <div class="price-box">
-        <div class="label">Cartão de crédito</div>
-        <div class="credit-value">R$ 898,00</div>
-      </div>
+  <div class="price-box">
+    <div class="label">Pagamento no cartão</div>
+    <div class="credit-value">R$ 898</div>
+  </div>
 
-      <a class="btn btn-card" href="https://mpago.li/11zHc3R" target="_blank">PAGAR NO CARTÃO</a>
-    </div>
+  <a class="btn btn-card" href="https://mpago.li/11zHc3R" target="_blank">PAGAR NO CARTÃO</a>
+</div>
 
-    <!-- INCLUSO -->
-    <div class="section-box">
-      <h3>✔️ O que está incluso</h3>
-      <ul>
-        <li>🚍 Transporte ida e volta</li>
-        <li>☕ Café da manhã</li>
-        <li>🍽️ Jantar</li>
-        <li>🏨 Opção de hospedagem</li>
-        <li>🧭 Condutor local</li>
-        <li>🛡️ Seguro de vida</li>
-        <li>🏞️ Acesso aos atrativos</li>
-      </ul>
-    </div>
+<!-- INCLUSO -->
+<div class="section">
+  <h3>✔️ Incluso</h3>
+  <ul>
+    <li>🚍 Transporte</li>
+    <li>☕ Café da manhã</li>
+    <li>🍽️ Jantar</li>
+    <li>🧭 Condutor local</li>
+  </ul>
+</div>
 
-    <!-- NÃO INCLUSO -->
-    <div class="section-box">
-      <h3>❌ O que não está incluso</h3>
-      <ul>
-        <li>🍛 Almoço</li>
-        <li>🥤 Bebidas extras</li>
-        <li>🛍️ Gastos pessoais</li>
-      </ul>
-    </div>
+<!-- SEGURANÇA -->
+<div class="section">
+  <h3>🔒 Reserva segura</h3>
+  <p>Após o pagamento, envie o comprovante no WhatsApp para confirmação da vaga.</p>
+</div>
 
-    <!-- CONFIANÇA -->
-    <div class="safe-box">
-      <h3>🔒 Compra segura</h3>
-      <p>
-        Após realizar o pagamento, envie seu comprovante no WhatsApp para confirmação rápida da sua reserva.
-      </p>
-    </div>
+</main>
 
-    <footer>
-      🌿 Trilheiros de Rondonópolis • Ninguém fica pra trás
-    </footer>
-
-  </main>
-
-  <a class="whatsapp-fixed"
+<!-- BOTÃO FINAL -->
+<div class="footer-action">
+  <a class="whatsapp-btn"
      href="https://wa.me/5566996926174?text=Olá,%20já%20realizei%20o%20pagamento%20e%20estou%20enviando%20o%20comprovante."
      target="_blank">
-    📲 ENVIAR COMPROVANTE NO WHATSAPP
+     📲 Enviar comprovante e confirmar vaga
   </a>
+</div>
+
+<footer>
+🌿 Trilheiros de Rondonópolis
+</footer>
 
 </body>
 </html>
