@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Pagamentos | Trilheiros</title>
+  <title>Pagamento | Trilheiros de Rondonópolis</title>
 
   <style>
     * {
@@ -11,13 +11,30 @@
       -webkit-tap-highlight-color: transparent;
     }
 
+    :root {
+      --bg: #050505;
+      --card: rgba(17, 17, 17, 0.92);
+      --card-border: rgba(255, 255, 255, 0.06);
+      --text: #ffffff;
+      --muted: #b8b8b8;
+      --soft: #8f8f8f;
+      --green: #39ff14;
+      --green-dark: #22c30a;
+      --shadow: 0 12px 30px rgba(0, 0, 0, 0.35);
+      --radius: 24px;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
     body {
       margin: 0;
-      font-family: 'Arial', sans-serif;
+      font-family: Arial, Helvetica, sans-serif;
       background:
-        radial-gradient(circle at top, rgba(57,255,20,0.12), transparent 30%),
-        linear-gradient(180deg, #030303 0%, #090909 50%, #000 100%);
-      color: #fff;
+        radial-gradient(circle at top, rgba(57,255,20,0.08), transparent 28%),
+        linear-gradient(180deg, #020202 0%, #070707 50%, #000000 100%);
+      color: var(--text);
       overflow-x: hidden;
     }
 
@@ -30,179 +47,161 @@
       width: 100%;
       display: block;
       height: auto;
-      border-bottom-left-radius: 22px;
-      border-bottom-right-radius: 22px;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.45);
+      border-bottom-left-radius: 28px;
+      border-bottom-right-radius: 28px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+    }
+
+    .overlay-top {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to bottom, rgba(0,0,0,0.12), rgba(0,0,0,0.4));
+      pointer-events: none;
     }
 
     main {
-      padding: 18px 14px 100px;
-      max-width: 520px;
-      margin: auto;
+      max-width: 540px;
+      margin: 0 auto;
+      padding: 18px 14px 110px;
     }
 
-    h1 {
+    .hero {
       text-align: center;
-      font-size: 28px;
-      margin: 18px 0 10px;
-      line-height: 1.15;
-      color: #ffffff;
+      margin: 12px 0 24px;
+    }
+
+    .hero h1 {
+      margin: 0 0 10px;
+      font-size: 29px;
+      line-height: 1.12;
       font-weight: 900;
-      letter-spacing: 0.5px;
-      text-transform: uppercase;
+      letter-spacing: 0.4px;
+      color: #fff;
       text-shadow:
-        0 1px 0 #39ff14,
-        0 2px 0 #2ed410,
-        0 3px 0 #24a80c,
-        0 6px 16px rgba(57,255,20,0.35);
+        0 1px 0 rgba(255,255,255,0.1),
+        0 3px 18px rgba(57,255,20,0.18);
     }
 
-    .subtitle {
-      text-align: center;
-      color: #bdbdbd;
-      font-size: 14px;
-      margin-bottom: 20px;
-    }
-
-    .alert {
-      background: rgba(17,17,17,0.88);
-      border: 1px solid rgba(57,255,20,0.25);
-      border-radius: 18px;
-      padding: 16px;
-      text-align: center;
-      margin-bottom: 22px;
-      box-shadow:
-        0 0 0 1px rgba(255,255,255,0.02) inset,
-        0 0 18px rgba(57,255,20,0.12);
-      backdrop-filter: blur(8px);
-    }
-
-    .alert strong {
-      color: #39ff14;
-      font-size: 17px;
+    .hero p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 15px;
+      line-height: 1.6;
     }
 
     .card {
       position: relative;
-      background: linear-gradient(180deg, rgba(14,14,14,0.96), rgba(7,7,7,0.96));
-      border: 1px solid rgba(57,255,20,0.18);
-      border-radius: 24px;
-      padding: 20px 16px 18px;
+      background: linear-gradient(180deg, rgba(18,18,18,0.96), rgba(10,10,10,0.96));
+      border: 1px solid var(--card-border);
+      border-radius: var(--radius);
+      padding: 22px 16px 18px;
       margin-bottom: 22px;
-      box-shadow:
-        0 0 0 1px rgba(255,255,255,0.03) inset,
-        0 12px 30px rgba(0,0,0,0.35),
-        0 0 24px rgba(57,255,20,0.08);
+      box-shadow: var(--shadow);
       overflow: hidden;
+      backdrop-filter: blur(8px);
     }
 
     .card::before {
       content: "";
       position: absolute;
-      top: -60px;
-      right: -60px;
-      width: 160px;
-      height: 160px;
-      background: radial-gradient(circle, rgba(57,255,20,0.16), transparent 70%);
+      top: -50px;
+      right: -40px;
+      width: 150px;
+      height: 150px;
+      background: radial-gradient(circle, rgba(57,255,20,0.10), transparent 70%);
       border-radius: 50%;
-    }
-
-    .card::after {
-      content: "";
-      position: absolute;
-      bottom: -80px;
-      left: -80px;
-      width: 180px;
-      height: 180px;
-      background: radial-gradient(circle, rgba(57,255,20,0.07), transparent 70%);
-      border-radius: 50%;
-    }
-
-    .badge {
-      position: absolute;
-      top: 14px;
-      right: 14px;
-      background: linear-gradient(135deg, #39ff14, #b7ff4a);
-      color: #000;
-      font-size: 11px;
-      font-weight: 900;
-      padding: 7px 12px;
-      border-radius: 999px;
-      box-shadow: 0 0 18px rgba(57,255,20,0.45);
-      z-index: 2;
+      pointer-events: none;
     }
 
     .card h2 {
+      margin: 0 0 16px;
       text-align: center;
       font-size: 24px;
-      margin: 0 0 16px;
-      color: #fff;
       font-weight: 900;
-      text-shadow:
-        0 1px 0 #39ff14,
-        0 2px 0 #2ed410,
-        0 3px 10px rgba(57,255,20,0.3);
+      color: #fff;
+      letter-spacing: 0.3px;
+      text-shadow: 0 2px 10px rgba(57,255,20,0.15);
       position: relative;
+      z-index: 1;
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 16px;
+      background: linear-gradient(135deg, var(--green), #b4ff55);
+      color: #000;
+      font-size: 12px;
+      font-weight: 900;
+      padding: 8px 14px;
+      border-radius: 999px;
+      box-shadow: 0 0 18px rgba(57,255,20,0.28);
+      position: relative;
+      left: 50%;
+      transform: translateX(-50%);
       z-index: 1;
     }
 
     .price-box {
       background: rgba(255,255,255,0.03);
-      border: 1px solid rgba(57,255,20,0.15);
-      border-radius: 18px;
-      padding: 15px 14px;
+      border: 1px solid rgba(255,255,255,0.06);
+      border-radius: 20px;
+      padding: 16px 14px;
       margin: 12px 0;
       text-align: center;
       position: relative;
       z-index: 1;
-      backdrop-filter: blur(8px);
     }
 
     .label {
       font-size: 13px;
-      color: #bdbdbd;
-      margin-bottom: 6px;
+      color: #d0d0d0;
       text-transform: uppercase;
       letter-spacing: 0.8px;
+      margin-bottom: 8px;
+      font-weight: 700;
     }
 
     .pix-value {
-      font-size: 31px;
+      font-size: 34px;
       font-weight: 900;
-      color: #39ff14;
-      text-shadow:
-        0 1px 0 #fff,
-        0 0 10px rgba(57,255,20,0.35);
+      color: var(--green);
       line-height: 1;
+      letter-spacing: -0.5px;
+      text-shadow:
+        0 0 14px rgba(57,255,20,0.18),
+        0 1px 0 rgba(255,255,255,0.12);
     }
 
     .credit-value {
-      font-size: 26px;
-      font-weight: 800;
-      color: #fff;
+      font-size: 30px;
+      font-weight: 900;
+      color: #ffffff;
       line-height: 1;
+      letter-spacing: -0.5px;
     }
 
-    .economy {
-      margin-top: 8px;
-      font-size: 12px;
-      color: #9cff87;
-      font-weight: bold;
+    .subtext {
+      margin-top: 9px;
+      font-size: 13px;
+      color: #9ee98e;
+      font-weight: 700;
     }
 
     .btn {
       width: 100%;
-      padding: 16px;
-      margin-top: 12px;
-      border-radius: 16px;
       border: none;
+      border-radius: 18px;
+      padding: 16px;
       font-size: 15px;
       font-weight: 900;
-      cursor: pointer;
       text-align: center;
       text-decoration: none;
       display: block;
-      transition: transform 0.18s ease, box-shadow 0.18s ease, filter 0.18s ease;
+      cursor: pointer;
+      transition: transform 0.18s ease, filter 0.18s ease, box-shadow 0.18s ease;
+      margin-top: 12px;
       position: relative;
       z-index: 1;
     }
@@ -212,23 +211,23 @@
     }
 
     .btn-pix {
-      background: linear-gradient(135deg, #39ff14, #a7ff45);
+      background: linear-gradient(135deg, var(--green), #a5ff48);
       color: #000;
       box-shadow:
-        0 10px 20px rgba(57,255,20,0.18),
-        0 0 16px rgba(57,255,20,0.28);
+        0 10px 24px rgba(57,255,20,0.18),
+        0 0 16px rgba(57,255,20,0.18);
     }
 
     .btn-pix:hover {
-      filter: brightness(1.03);
+      filter: brightness(1.04);
       transform: translateY(-1px);
     }
 
     .btn-card {
       background: rgba(255,255,255,0.03);
-      border: 1px solid rgba(57,255,20,0.35);
-      color: #39ff14;
-      box-shadow: 0 0 10px rgba(57,255,20,0.08);
+      border: 1px solid rgba(57,255,20,0.22);
+      color: var(--green);
+      box-shadow: 0 0 10px rgba(57,255,20,0.06);
     }
 
     .btn-card:hover {
@@ -239,31 +238,29 @@
     .pix-info {
       text-align: center;
       font-size: 12px;
-      color: #9d9d9d;
+      color: var(--soft);
       margin-top: 8px;
-      line-height: 1.5;
+      line-height: 1.6;
       position: relative;
       z-index: 1;
     }
 
     .section-box {
-      background: rgba(17,17,17,0.9);
-      border-radius: 22px;
+      background: var(--card);
+      border: 1px solid var(--card-border);
+      border-radius: 24px;
       padding: 20px 18px;
       margin: 24px 0;
-      border: 1px solid rgba(57,255,20,0.12);
-      box-shadow:
-        0 0 0 1px rgba(255,255,255,0.02) inset,
-        0 10px 26px rgba(0,0,0,0.28);
+      box-shadow: var(--shadow);
       backdrop-filter: blur(8px);
     }
 
     .section-box h3 {
-      text-align: center;
-      color: #39ff14;
       margin: 0 0 16px;
-      font-size: 19px;
-      text-shadow: 0 0 10px rgba(57,255,20,0.18);
+      text-align: center;
+      font-size: 20px;
+      color: #fff;
+      text-shadow: 0 0 10px rgba(57,255,20,0.12);
     }
 
     .section-box ul {
@@ -273,49 +270,83 @@
     }
 
     .section-box li {
-      padding: 10px 0;
-      font-size: 15px;
+      padding: 11px 0;
       border-bottom: 1px solid rgba(255,255,255,0.05);
+      font-size: 15px;
+      color: #f1f1f1;
     }
 
     .section-box li:last-child {
       border-bottom: none;
     }
 
-    .whatsapp-float {
+    .safe-box {
+      background: linear-gradient(180deg, rgba(16,16,16,0.95), rgba(9,9,9,0.95));
+      border: 1px solid rgba(57,255,20,0.10);
+      border-radius: 24px;
+      padding: 18px 16px;
+      margin-top: 22px;
+      text-align: center;
+      box-shadow: var(--shadow);
+    }
+
+    .safe-box h3 {
+      margin: 0 0 10px;
+      font-size: 18px;
+      color: var(--green);
+    }
+
+    .safe-box p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.7;
+    }
+
+    .whatsapp-fixed {
       position: fixed;
-      bottom: 18px;
-      right: 16px;
-      left: 16px;
-      background: linear-gradient(135deg, #25D366, #57f28f);
-      color: #000;
-      padding: 16px 18px;
-      border-radius: 18px;
-      font-weight: 900;
-      text-decoration: none;
-      box-shadow:
-        0 12px 30px rgba(37,211,102,0.28),
-        0 0 18px rgba(37,211,102,0.22);
+      left: 14px;
+      right: 14px;
+      bottom: 14px;
       z-index: 999;
+      background: linear-gradient(135deg, #25D366, #53f18a);
+      color: #000;
+      text-decoration: none;
+      font-weight: 900;
       font-size: 16px;
       text-align: center;
+      padding: 17px 18px;
+      border-radius: 20px;
+      box-shadow:
+        0 14px 34px rgba(37,211,102,0.28),
+        0 0 18px rgba(37,211,102,0.18);
+      transition: transform 0.18s ease, filter 0.18s ease;
+    }
+
+    .whatsapp-fixed:hover {
+      filter: brightness(1.03);
+      transform: translateY(-1px);
     }
 
     footer {
       text-align: center;
       font-size: 13px;
-      color: #9c9c9c;
-      padding: 28px 16px 18px;
-      line-height: 1.6;
+      color: #989898;
+      padding: 20px 16px 6px;
+      line-height: 1.7;
     }
 
     @media (min-width: 700px) {
-      .whatsapp-float {
-        max-width: 420px;
+      .whatsapp-fixed {
+        max-width: 460px;
         margin: auto;
         left: 50%;
-        transform: translateX(-50%);
         right: auto;
+        transform: translateX(-50%);
+      }
+
+      .whatsapp-fixed:hover {
+        transform: translateX(-50%) translateY(-1px);
       }
     }
   </style>
@@ -327,31 +358,29 @@
     }
   </script>
 </head>
-
 <body>
 
   <header>
     <img src="https://i.imgur.com/b3zIN6n.jpeg" alt="Banner Trilheiros">
+    <div class="overlay-top"></div>
   </header>
 
   <main>
-    <h1>Escolha sua forma de pagamento</h1>
-    <p class="subtitle">Garanta sua vaga com segurança e praticidade</p>
 
-    <div class="alert">
-      ⚠️ <strong>Vagas limitadas</strong><br>
-      42 vagas totais • 30 camas • 15 vagas camping
-    </div>
+    <section class="hero">
+      <h1>Escolha sua forma de pagamento</h1>
+      <p>Finalize sua reserva com segurança e praticidade.</p>
+    </section>
 
-    <!-- CASAL -->
+    <!-- QUARTO CASAL -->
     <div class="card">
-      <div class="badge">MELHOR OPÇÃO</div>
+      <div class="badge">MELHOR VALOR NO PIX</div>
       <h2>💑 Quarto de Casal</h2>
 
       <div class="price-box">
-        <div class="label">PIX à vista</div>
-        <div class="pix-value">R$ 1.700</div>
-        <div class="economy">Mais econômico e mais rápido</div>
+        <div class="label">Pagamento via PIX</div>
+        <div class="pix-value">R$ 1.700,00</div>
+        <div class="subtext">Valor total da reserva</div>
       </div>
 
       <button class="btn btn-pix" onclick="copiarPix()">PAGAR VIA PIX</button>
@@ -359,20 +388,20 @@
 
       <div class="price-box">
         <div class="label">Cartão de crédito</div>
-        <div class="credit-value">R$ 1.800</div>
+        <div class="credit-value">R$ 1.800,00</div>
       </div>
 
       <a class="btn btn-card" href="https://mpago.li/2WVGXFS" target="_blank">PAGAR NO CARTÃO</a>
     </div>
 
-    <!-- COMPARTILHADO -->
+    <!-- QUARTO COMPARTILHADO -->
     <div class="card">
       <h2>🛏️ Quarto Compartilhado</h2>
 
       <div class="price-box">
-        <div class="label">PIX à vista</div>
-        <div class="pix-value">R$ 949</div>
-        <div class="economy">Melhor valor para quem quer economizar</div>
+        <div class="label">Pagamento via PIX</div>
+        <div class="pix-value">R$ 949,00</div>
+        <div class="subtext">Valor total da reserva</div>
       </div>
 
       <button class="btn btn-pix" onclick="copiarPix()">PAGAR VIA PIX</button>
@@ -380,7 +409,7 @@
 
       <div class="price-box">
         <div class="label">Cartão de crédito</div>
-        <div class="credit-value">R$ 969</div>
+        <div class="credit-value">R$ 969,00</div>
       </div>
 
       <a class="btn btn-card" href="https://mpago.li/1j4rWra" target="_blank">PAGAR NO CARTÃO</a>
@@ -391,9 +420,9 @@
       <h2>⛺ Camping</h2>
 
       <div class="price-box">
-        <div class="label">PIX à vista</div>
-        <div class="pix-value">R$ 879</div>
-        <div class="economy">Opção ideal para quem ama natureza</div>
+        <div class="label">Pagamento via PIX</div>
+        <div class="pix-value">R$ 879,00</div>
+        <div class="subtext">Valor total da reserva</div>
       </div>
 
       <button class="btn btn-pix" onclick="copiarPix()">PAGAR VIA PIX</button>
@@ -401,7 +430,7 @@
 
       <div class="price-box">
         <div class="label">Cartão de crédito</div>
-        <div class="credit-value">R$ 898</div>
+        <div class="credit-value">R$ 898,00</div>
       </div>
 
       <a class="btn btn-card" href="https://mpago.li/11zHc3R" target="_blank">PAGAR NO CARTÃO</a>
@@ -430,17 +459,26 @@
         <li>🛍️ Gastos pessoais</li>
       </ul>
     </div>
+
+    <!-- CONFIANÇA -->
+    <div class="safe-box">
+      <h3>🔒 Compra segura</h3>
+      <p>
+        Após realizar o pagamento, envie seu comprovante no WhatsApp para confirmação rápida da sua reserva.
+      </p>
+    </div>
+
+    <footer>
+      🌿 Trilheiros de Rondonópolis • Ninguém fica pra trás
+    </footer>
+
   </main>
 
-  <a class="whatsapp-float"
+  <a class="whatsapp-fixed"
      href="https://wa.me/5566996926174?text=Olá,%20já%20realizei%20o%20pagamento%20e%20estou%20enviando%20o%20comprovante."
      target="_blank">
     📲 ENVIAR COMPROVANTE NO WHATSAPP
   </a>
-
-  <footer>
-    🌿 Trilheiros de Rondonópolis • Ninguém fica pra trás
-  </footer>
 
 </body>
 </html>
