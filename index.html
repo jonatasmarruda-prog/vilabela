@@ -1,254 +1,174 @@
-<!DOCTYPE html>
-<html lang="pt-BR">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Pagamentos | Trilheiros</title>
-
 <style>
-* { box-sizing: border-box; }
-
-body {
-  margin: 0;
-  font-family: Arial, Helvetica, sans-serif;
-  background-color: #000;
-  color: #ffffff;
-}
-
-/* BANNER */
-header img {
-  width: 100%;
-  height: auto;
-  display: block;
-}
-
-/* CONTEÚDO */
-main {
-  padding: 20px 15px 30px;
-}
-
-h1 {
-  text-align: center;
-  color: #39ff14;
-  margin-bottom: 15px;
-  font-size: 22px;
-  text-shadow: 0 0 8px #39ff14;
-}
-
-/* ALERTA */
-.alert {
-  background: #111;
-  border: 1px solid #39ff14;
-  border-radius: 12px;
-  padding: 15px;
-  text-align: center;
-  margin-bottom: 25px;
-  box-shadow: 0 0 12px rgba(57,255,20,0.25);
-}
-
-/* CARDS */
 .card {
-  background-color: #0b0b0b;
-  border: 1px solid #1f1f1f;
-  border-radius: 14px;
-  padding: 18px;
-  margin-bottom: 20px;
-  box-shadow: 0 0 12px rgba(57,255,20,0.15);
+  background: linear-gradient(145deg, #0a0a0a, #111);
+  border: 1px solid rgba(57,255,20,0.2);
+  border-radius: 18px;
+  padding: 20px;
+  margin-bottom: 25px;
+  box-shadow: 0 0 20px rgba(57,255,20,0.15);
+  position: relative;
+  overflow: hidden;
+}
+
+.card::before {
+  content: "";
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(circle, rgba(57,255,20,0.08), transparent 60%);
+  transform: rotate(25deg);
 }
 
 .card h2 {
   text-align: center;
   color: #39ff14;
-  font-size: 18px;
-  text-shadow: 0 0 6px #39ff14;
+  font-size: 20px;
+  margin-bottom: 15px;
+}
+
+.badge {
+  position: absolute;
+  top: 15px;
+  right: -40px;
+  background: #39ff14;
+  color: #000;
+  font-size: 12px;
+  padding: 6px 40px;
+  transform: rotate(45deg);
+  font-weight: bold;
+}
+
+.price-box {
+  background: #111;
+  border: 1px solid rgba(57,255,20,0.3);
+  border-radius: 12px;
+  padding: 12px;
+  margin: 10px 0;
+  text-align: center;
 }
 
 .price {
-  text-align: center;
-  margin: 6px 0;
+  font-size: 16px;
+  margin-bottom: 5px;
+}
+
+.pix {
+  color: #39ff14;
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.credit {
+  color: #ccc;
   font-size: 15px;
 }
 
-.parcela {
-  text-align: center;
-  font-size: 14px;
-  color: #bfbfbf;
-}
-
-/* BOTÕES */
 .btn {
   width: 100%;
   padding: 15px;
-  margin-top: 10px;
+  margin-top: 12px;
   border-radius: 12px;
   border: none;
   font-size: 15px;
   font-weight: bold;
   cursor: pointer;
-  background: #39ff14;
-  color: #000;
   text-align: center;
   text-decoration: none;
-  box-shadow: 0 0 8px #39ff14, 0 0 16px #39ff14;
+  transition: 0.3s;
 }
 
-.btn:hover {
-  filter: brightness(1.1);
+.btn-pix {
+  background: #39ff14;
+  color: #000;
+  box-shadow: 0 0 10px #39ff14, 0 0 20px rgba(57,255,20,0.6);
+}
+
+.btn-pix:hover {
+  transform: scale(1.03);
+}
+
+.btn-card {
+  background: transparent;
+  border: 1px solid #39ff14;
+  color: #39ff14;
+}
+
+.btn-card:hover {
+  background: #39ff14;
+  color: #000;
 }
 
 .pix-info {
   text-align: center;
   font-size: 12px;
-  color: #ccc;
-  margin-top: 6px;
-}
-
-/* BLOCOS INFO */
-.trust {
-  background: #111;
-  border-radius: 14px;
-  padding: 20px;
-  margin: 25px 0;
-  border: 1px solid #222;
-}
-
-.trust h3 {
-  text-align: center;
-  color: #39ff14;
-  margin-bottom: 15px;
-}
-
-.trust ul {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-}
-
-.trust li {
-  padding: 6px 0;
-  font-size: 15px;
-}
-
-/* WHATSAPP FLUTUANTE */
-.whatsapp-float {
-  position: fixed;
-  bottom: 18px;
-  right: 18px;
-  background: #25D366;
-  color: #000;
-  padding: 14px 18px;
-  border-radius: 50px;
-  font-weight: bold;
-  text-decoration: none;
-  box-shadow: 0 0 10px #25D366, 0 0 20px rgba(37,211,102,0.7);
-  z-index: 999;
-  font-size: 15px;
-}
-
-/* FOOTER */
-footer {
-  text-align: center;
-  font-size: 13px;
   color: #aaa;
-  padding: 20px 10px;
+  margin-top: 6px;
 }
 </style>
 
-<script>
-function copiarPix() {
-  navigator.clipboard.writeText("trilheiros.roomt@gmail.com");
-  alert("Chave PIX copiada!");
-}
-</script>
-</head>
-
-<body>
-
-<header>
-  <img src="https://i.imgur.com/b3zIN6n.jpeg" alt="Banner Trilheiros">
-</header>
-
-<main>
-
-<h1>Escolha sua forma de pagamento</h1>
-
-<div class="alert">
-  ⚠️ <strong>Vagas limitadas</strong><br>
-  42 vagas totais • 30 camas • 15 vagas camping
-</div>
-
 <!-- CASAL -->
 <div class="card">
+  <div class="badge">MELHOR OPÇÃO</div>
   <h2>💑 Quarto de Casal</h2>
-  <p class="price">PIX à vista: <strong>R$ 1.700,00</strong></p>
-  <p class="parcela">PIX parcelado: <strong>4x de R$ 425,00</strong></p>
-  <button class="btn" onclick="copiarPix()">PAGAR VIA PIX</button>
-  <p class="pix-info">Caso seja outro valor, avise ao Jonatas.</p>
 
-  <p class="price">Cartão de crédito: <strong>R$ 1.800,00</strong></p>
-  <a class="btn" href="https://mpago.li/2WVGXFS" target="_blank">PAGAR NO CARTÃO</a>
+  <div class="price-box">
+    <div class="price">PIX à vista</div>
+    <div class="pix">R$ 1.700,00</div>
+  </div>
+
+  <button class="btn btn-pix" onclick="copiarPix()">PAGAR VIA PIX</button>
+  <p class="pix-info">Pagamento rápido e garantido</p>
+
+  <div class="price-box">
+    <div class="price">Cartão de crédito</div>
+    <div class="credit">R$ 1.800,00</div>
+  </div>
+
+  <a class="btn btn-card" href="https://mpago.li/2WVGXFS" target="_blank">
+    PAGAR NO CARTÃO
+  </a>
 </div>
 
 <!-- COMPARTILHADO -->
 <div class="card">
   <h2>🛏️ Quarto Compartilhado</h2>
-  <p class="price">PIX à vista: <strong>R$ 949,00</strong></p>
-  <p class="parcela">PIX parcelado: <strong>4x de R$ 237,25</strong></p>
-  <button class="btn" onclick="copiarPix()">PAGAR VIA PIX</button>
-  <p class="pix-info">Caso seja outro valor, avise ao Jonatas.</p>
 
-  <p class="price">Cartão de crédito: <strong>R$ 969,00</strong></p>
-  <a class="btn" href="https://mpago.li/1j4rWra" target="_blank">PAGAR NO CARTÃO</a>
+  <div class="price-box">
+    <div class="price">PIX à vista</div>
+    <div class="pix">R$ 949,00</div>
+  </div>
+
+  <button class="btn btn-pix" onclick="copiarPix()">PAGAR VIA PIX</button>
+
+  <div class="price-box">
+    <div class="price">Cartão de crédito</div>
+    <div class="credit">R$ 969,00</div>
+  </div>
+
+  <a class="btn btn-card" href="https://mpago.li/1j4rWra" target="_blank">
+    PAGAR NO CARTÃO
+  </a>
 </div>
 
 <!-- CAMPING -->
 <div class="card">
   <h2>⛺ Camping</h2>
-  <p class="price">PIX à vista: <strong>R$ 879,00</strong></p>
-  <p class="parcela">PIX parcelado: <strong>4x de R$ 219,75</strong></p>
-  <button class="btn" onclick="copiarPix()">PAGAR VIA PIX</button>
-  <p class="pix-info">Caso seja outro valor, avise ao Jonatas.</p>
 
-  <p class="price">Cartão de crédito: <strong>R$ 898,00</strong></p>
-  <a class="btn" href="https://mpago.li/11zHc3R" target="_blank">PAGAR NO CARTÃO</a>
+  <div class="price-box">
+    <div class="price">PIX à vista</div>
+    <div class="pix">R$ 879,00</div>
+  </div>
+
+  <button class="btn btn-pix" onclick="copiarPix()">PAGAR VIA PIX</button>
+
+  <div class="price-box">
+    <div class="price">Cartão de crédito</div>
+    <div class="credit">R$ 898,00</div>
+  </div>
+
+  <a class="btn btn-card" href="https://mpago.li/11zHc3R" target="_blank">
+    PAGAR NO CARTÃO
+  </a>
 </div>
-
-<!-- INCLUSO -->
-<div class="trust">
-  <h3>✔️ O que está incluso</h3>
-  <ul>
-    <li>🚍 Transporte ida e volta</li>
-    <li>☕ Café da manhã</li>
-    <li>🍽️ Jantar</li>
-    <li>🏨 Opção de hospedagem</li>
-    <li>🧭 Condutor local</li>
-    <li>🛡️ Seguro de vida</li>
-    <li>🏞️ Acesso aos atrativos</li>
-  </ul>
-</div>
-
-<!-- NÃO INCLUSO -->
-<div class="trust">
-  <h3>❌ O que não está incluso</h3>
-  <ul>
-    <li>🍛 Almoço</li>
-    <li>🥤 Bebidas extras</li>
-    <li>🛍️ Gastos pessoais</li>
-  </ul>
-</div>
-
-</main>
-
-<a class="whatsapp-float"
-href="https://wa.me/5566996926174?text=Olá,%20já%20realizei%20o%20pagamento%20e%20estou%20enviando%20o%20comprovante."
-target="_blank">
-📲 WhatsApp
-</a>
-
-<footer>
-🌿 Trilheiros de Rondonópolis • Ninguém fica pra trás
-</footer>
-
-</body>
-</html>
-
